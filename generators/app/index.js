@@ -104,57 +104,45 @@ class VintageFrontend extends Generator {
 
   writing() {
     const props  = this.props;
-    const copy = (input, output) =>
+    const copy = (input, output = input) =>
       this.fs.copy(this.templatePath(input), this.destinationPath(output));
-    const template = (input, output) =>
+    const template = (input, output = input) =>
       this.fs.copyTpl(this.templatePath(input), this.destinationPath(output), props);
 
     props._ = { kebabCase: _.kebabCase };
 
     // static files
     copy('gitignore', '.gitignore');
-    copy('gulpfile.js', 'gulpfile.js');
-    copy('jsdoc.json', 'jsdoc.json');
-    copy('rules.jscsrc', 'rules.jscsrc');
-    copy('yarn.lock', 'yarn.lock');
+    copy('gulpfile.js');
+    copy('jsdoc.json');
+    copy('rules.jscsrc');
+    copy('yarn.lock');
 
     // static files (templates)
-    this.fs.copyTpl(this.templatePath('README.md'),
-      this.destinationPath('README.md'), props);
-    this.fs.copyTpl(this.templatePath('package.json_vm'),
-      this.destinationPath('package.json'), props);
-    this.fs.copyTpl(this.templatePath('webpack.config.js'),
-      this.destinationPath('webpack.config.js'), props);
+    template('README.md');
+    template('package.json_vm', 'package.json');
+    template('webpack.config.js');
     if (props.splitting) {
-      this.fs.copy(this.templatePath('webpack-chunk-manifest.json'),
-        this.destinationPath('www/static/webpack-chunk-manifest.json'));
+      copy('webpack-chunk-manifest.json', 'www/static/webpack-chunk-manifest.json');
     }
 
     // gulp config
-    this.fs.copyTpl(this.templatePath('gulp/config.js'),
-      this.destinationPath('gulp/config.js'), props);
+    template('gulp/config.js');
 
     // gulp tasks
-    this.fs.copy(this.templatePath('gulp/tasks/sprite-svg'),
-      this.destinationPath('gulp/tasks/sprite-svg'));
-    this.fs.copyTpl(this.templatePath('gulp/tasks/default.js'),
-      this.destinationPath('gulp/tasks/default.js'), props);
-    this.fs.copy(this.templatePath('gulp/tasks/docs.js'),
-      this.destinationPath('gulp/tasks/docs.js'));
-    this.fs.copy(this.templatePath('gulp/tasks/livereload.js'),
-      this.destinationPath('gulp/tasks/livereload.js'));
-    this.fs.copyTpl(this.templatePath('gulp/tasks/scripts.js'),
-      this.destinationPath('gulp/tasks/scripts.js'), props);
-    this.fs.copy(this.templatePath('gulp/tasks/styles.js'),
-      this.destinationPath('gulp/tasks/styles.js'));
-    this.fs.copyTpl(this.templatePath('gulp/tasks/templates.js'),
-      this.destinationPath('gulp/tasks/templates.js'), props);
+    copy('gulp/tasks/sprite-svg');
+    template('gulp/tasks/default.js');
+    copy('gulp/tasks/docs.js');
+    copy('gulp/tasks/livereload.js');
+    template('gulp/tasks/scripts.js');
+    copy('gulp/tasks/styles.js');
+    template('gulp/tasks/templates.js');
 
     // copy source directory
-    this.fs.copyTpl(this.templatePath('src'), this.destinationPath('src'), props);
+    template('src');
 
     // copy output directory
-    this.fs.copyTpl(this.templatePath('www'), this.destinationPath('www'), props);
+    template('www');
 
     // create folders for images, fonts, scripts
     mkdirp.sync(this.destinationPath('www/static/fonts'));
