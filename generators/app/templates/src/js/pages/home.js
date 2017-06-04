@@ -32,7 +32,7 @@ export default class Home {
   init() {
     this.example();
   }
-}<% } %><% if (!splitting) { %>
+}<% } %><% if (splitting) { %>
 
 export default class Home {
   /**

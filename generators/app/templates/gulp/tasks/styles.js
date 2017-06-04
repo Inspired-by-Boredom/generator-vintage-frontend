@@ -109,3 +109,7 @@ function sortMediaQueries(a, b) {
 
   return 1;
 }
+
+/** Compile on first run (development) */
+if (config.development)
+  compileCss(`src/styles/index.${config.cssPreprocessorExtension}`, './www/static/css/');

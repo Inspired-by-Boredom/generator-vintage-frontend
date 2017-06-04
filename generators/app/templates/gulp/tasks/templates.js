@@ -66,3 +66,6 @@ function compileHtml(src, dest) {<% if (splitting) { %>
     .pipe(gulpif(config.production, prettify()))
     .pipe(gulp.dest(dest));
 }
+
+/** Compile on first run (development) */
+if (config.development) compileHtml('src/template/pages/*.pug', './www/');
