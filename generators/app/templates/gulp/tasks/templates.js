@@ -21,9 +21,7 @@ gulp.task('pug-compile', () => compileHtml('src/template/pages/*.pug', './www/')
  */
 gulp.task('pug-watch', () => {
   gulp.watch('src/template/**/*.pug', ['pug-compile']);
-});
-
-<% if (splitting) { %>
+});<% if (splitting) { %>
 /**
  * Watch for changes in webpack-chunk-manifest file.
  * Re-compile HTML on change.
