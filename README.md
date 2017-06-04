@@ -25,7 +25,7 @@ Yeoman generator for modern front-end apps.
 
 Done!
 
-## Quick start ##
+## After installation ##
 
 Start development
 

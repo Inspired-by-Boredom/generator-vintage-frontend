@@ -112,11 +112,11 @@ class VintageFrontend extends Generator {
     props._ = { kebabCase: _.kebabCase };
 
     // static files
-    this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
-    this.fs.copy(this.templatePath('gulpfile.js'), this.destinationPath('gulpfile.js'));
-    this.fs.copy(this.templatePath('jsdoc.json'), this.destinationPath('jsdoc.json'));
-    this.fs.copy(this.templatePath('rules.jscsrc'), this.destinationPath('rules.jscsrc'));
-    this.fs.copy(this.templatePath('yarn.lock'), this.destinationPath('yarn.lock'));
+    copy('gitignore', '.gitignore');
+    copy('gulpfile.js', 'gulpfile.js');
+    copy('jsdoc.json', 'jsdoc.json');
+    copy('rules.jscsrc', 'rules.jscsrc');
+    copy('yarn.lock', 'yarn.lock');
 
     // static files (templates)
     this.fs.copyTpl(this.templatePath('README.md'),
