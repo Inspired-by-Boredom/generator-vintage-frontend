@@ -131,4 +131,4 @@ npm run-script openDocs
 
 ## Versioning
 
-Current version is 0.3.1
+Current version is 0.1.1

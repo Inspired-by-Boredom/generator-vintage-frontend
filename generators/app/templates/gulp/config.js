@@ -38,7 +38,8 @@ const webpackConfig = require('../webpack.config.js');
 const plumberOptions = {
   errorHandler: notify.onError(error => `Error: ${error.message}`)
 };<% if (splitting) { %>
-  /**
+
+/**
  * Path to the file with chunks data.
  * Used when compiling HTML. Creates global js variable in project.
  * Variable is named 'window.webpackManifest'.

@@ -28,7 +28,7 @@ module.exports = {
     }),<% } %>
     new WebpackMd5Hash(),
 
-    new webpack.NoEmitOnErrorsPlugin(),<% if (splitting) { %>,
+    new webpack.NoEmitOnErrorsPlugin()<% if (splitting) { %>,
 
     new ChunkManifestPlugin({
       filename: 'webpack-chunk-manifest.json',

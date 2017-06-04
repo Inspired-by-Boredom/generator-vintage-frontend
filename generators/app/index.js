@@ -161,6 +161,7 @@ class VintageFrontend extends Generator {
     mkdirp.sync(this.destinationPath('www/static/img'));
     mkdirp.sync(this.destinationPath('www/static/js'));
     mkdirp.sync(this.destinationPath('www/static/css'));
+    mkdirp.sync(this.destinationPath('src/js/modules/dep'));
 
     // remove unnecessary
     if (!props.jquery) {
