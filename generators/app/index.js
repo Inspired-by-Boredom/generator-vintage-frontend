@@ -15,7 +15,7 @@ class VintageFrontend extends Generator {
     const done = this.async();
 
     this.log(yosay(
-      `Welcome to \nVintage Web Production ${chalk.red('vintage-frontend')} generator`
+      `Vintage Web Production ${chalk.yellow('vintage-frontend')} generator`
     ));
 
     this.prompt(prompts, function (props) {
@@ -25,6 +25,7 @@ class VintageFrontend extends Generator {
   }
 
   writing() {
+    console.log('writing...');
     writeFiles.call(this);
   }
 
