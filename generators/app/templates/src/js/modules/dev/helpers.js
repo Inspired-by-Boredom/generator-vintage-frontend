@@ -2,7 +2,7 @@
  * Commonly used constants and functions.
  *
  * @module Helpers
- */
+ */<% if (jquery) { %>
 
 /**
  * Cache body DOM element.
@@ -59,6 +59,61 @@ export const $scrolledElements = $('html, body');
  * @type {Number}
  */
 export const winWidth = $window.width();
+
+/**
+ * Detect current page.
+ *
+ * @constant
+ * @type {String}
+ */
+export const currentPage = $body.find('main').data('page');
+
+/**
+ * Toggle class on specified element on click.
+ *
+ * @param {jQuery} clickHandler
+ * @param {jQuery} element
+ * @param {String} [className='active']
+ */
+export const toggleClass = (clickHandler, element, className = css.active) => {
+  clickHandler.on('click tap', () => element.toggleClass(className));
+};
+
+/**
+ * Check if element is in viewport.
+ *
+ * @param {jQuery} $element
+ * @param {Boolean} [fullyInView = false] - element should be fully in viewport?
+ * @param {Number} [offsetTop = 0]
+ * @returns {Boolean}
+ */
+export const isScrolledIntoView = ($element, offsetTop = 0, fullyInView = false) => {
+  const pageTop = $window.scrollTop();
+  const pageBottom = pageTop + $window.height();
+  const elementTop = $element.offset().top;
+  const elementBottom = elementTop + $element.height();
+
+  if (fullyInView) return ((pageTop < elementTop) && (pageBottom > elementBottom));
+
+  return (((elementTop + offsetTop) <= pageBottom) && (elementBottom >= pageTop));
+};
+
+/**
+ * Check specified item to be target of the event.
+ *
+ * @param {Object} e - Event object.
+ * @param {jQuery} item - Item to compare with.
+ * @returns {Boolean} - Indicate whether clicked target is the specified item or not.
+ */
+export const checkClosest = (e, item) => $(e.target).closest(item).length > 0;<% } %><% if (!jquery) { %>
+
+/**
+ * Detect current page.
+ *
+ * @constant
+ * @type {String}
+ */
+export const currentPage = document.querySelector('main').dataset.page;<% } %>
 
 /**
  * Match media device indicator.
@@ -121,14 +176,6 @@ export class Resp {
 }
 
 /**
- * Detect current page.
- *
- * @constant
- * @type {String}
- */
-export const currentPage = $body.find('main').data('page');
-
-/**
  * Css class names.
  *
  * @constant
@@ -139,50 +186,11 @@ export const css = {
 };
 
 /**
- * Check specified item to be target of the event.
- *
- * @param {Object} e - Event object.
- * @param {jQuery} item - Item to compare with.
- * @returns {Boolean} - Indicate whether clicked target is the specified item or not.
- */
-export const checkClosest = (e, item) => $(e.target).closest(item).length > 0;
-
-/**
  * Generate string of random letters.
  *
  * @param {Number} length
  */
 export const randomString = (length = 10) => Math.random().toString(36).substr(2, length > 10 ? length : 10);
-
-/**
- * Toggle class on specified element on click.
- *
- * @param {jQuery} clickHandler
- * @param {jQuery} element
- * @param {String} [className='active']
- */
-export const toggleClass = (clickHandler, element, className = css.active) => {
-  clickHandler.on('click tap', () => element.toggleClass(className));
-};
-
-/**
- * Check if element is in viewport.
- *
- * @param {jQuery} $element
- * @param {Boolean} [fullyInView = false] - element should be fully in viewport?
- * @param {Number} [offsetTop = 0]
- * @returns {Boolean}
- */
-export const isScrolledIntoView = ($element, offsetTop = 0, fullyInView = false) => {
-  const pageTop = $window.scrollTop();
-  const pageBottom = pageTop + $window.height();
-  const elementTop = $element.offset().top;
-  const elementBottom = elementTop + $element.height();
-
-  if (fullyInView) return ((pageTop < elementTop) && (pageBottom > elementBottom));
-
-  return (((elementTop + offsetTop) <= pageBottom) && (elementBottom >= pageTop));
-};
 
 /**
  * Returns a function, that, as long as it continues to be invoked, will not be triggered.

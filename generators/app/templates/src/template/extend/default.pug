@@ -26,10 +26,11 @@ html(lang='ru')
                 div.svg-container(style="position: absolute; width: 0; height: 0; overflow: hidden;")
                     include ../partials/_sprite.svg
 
-            // picture element HTML5 shiv
+            // picture element HTML5 shiv<% if (splitting) { %>, webpackManifest global variable<% } %>
             block inlineScripts
                 script.
-                  document.createElement('picture');
+                  document.createElement('picture');<% if (splitting) { %>
+                  window.webpackManifest = !{JSON.stringify(webpackManifest)};<% } %>
 
             // Header
             block header

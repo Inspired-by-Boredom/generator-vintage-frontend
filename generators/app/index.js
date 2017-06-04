@@ -118,7 +118,7 @@ class VintageFrontend extends Generator {
     this.fs.copy(this.templatePath('rules.jscsrc'), this.destinationPath('rules.jscsrc'));
     this.fs.copy(this.templatePath('yarn.lock'), this.destinationPath('yarn.lock'));
 
-    // templates
+    // static files (templates)
     this.fs.copyTpl(this.templatePath('README.md'),
       this.destinationPath('README.md'), props);
     this.fs.copyTpl(this.templatePath('package.json_vm'),
@@ -160,10 +160,14 @@ class VintageFrontend extends Generator {
     mkdirp.sync(this.destinationPath('www/static/fonts'));
     mkdirp.sync(this.destinationPath('www/static/img'));
     mkdirp.sync(this.destinationPath('www/static/js'));
+    mkdirp.sync(this.destinationPath('www/static/css'));
 
     // remove unnecessary
     if (!props.jquery) {
       this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
+    }
+    if (!props.splitting) {
+      this.fs.delete(this.destinationPath('src/js/components/chunkExample.js'));
     }
   }
 
@@ -177,7 +181,7 @@ class VintageFrontend extends Generator {
   }
 
   end() {
-    this.log(chalk.green(`\n\nProject '${props.name}' is generated. Happy coding!\n`));
+    this.log(chalk.green(`\n\nProject '${this.props.name}' is generated. Happy coding!\n`));
   }
 }
 
