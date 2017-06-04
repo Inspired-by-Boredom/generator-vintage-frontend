@@ -23,15 +23,13 @@ if (config.development) {
  * Only on production.
  */
 if (config.production) {
-  // add 'min' suffix
+  // create '.min' files
   webpackConfig.plugins.push(
     new Webpack.optimize.UglifyJsPlugin({
       sourceMap: false,
       compress: { unsafe: true }
     })
   );
-
-  // minify
   webpackConfig.output.filename = '[name].min.js';<% if (splitting) { %>
   webpackConfig.output.chunkFilename = 'js/chunks/[name]-[chunkhash].min.js';<% } %>
 }

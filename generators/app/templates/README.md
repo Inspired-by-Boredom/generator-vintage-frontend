@@ -1,13 +1,13 @@
 # Vintage
 
-Vintage start project <% if (splitting) { %>(with webpack chunks auto generation)<% } %>.
+Vintage start project<% if (splitting) { %> (with webpack chunks auto generation)<% } %>.
 
 ## Overview
 
 * [Installation](#markdown-header-installation)
 * [WebStorm configuration](#markdown-header-webstorm-configuration)
-* [NPM scripts](#markdown-header-npm-scripts)
-* [Code splitting](#markdown-header-code-splitting)
+* [NPM scripts](#markdown-header-npm-scripts)<% if (splitting) { %>
+* [Code splitting](#markdown-header-code-splitting)<% } %>
 * [Public API](#markdown-header-public-api)
 * [JSDoc](#markdown-header-jsdoc)
 * [Notes](#markdown-header-notes)
@@ -64,6 +64,7 @@ Build production bundle (build '.min' files, prettify html)
 ```
 npm run production
 ```
+<% if (splitting) { %>
 
 ## Code splitting
 
@@ -81,6 +82,7 @@ require.ensure([], require => {
 
 }, 'chunkFileName');
 ```
+<% } %>
 
 ##### Warning!
 
@@ -117,8 +119,8 @@ npm run-script openDocs
 ## Notes
 
 1. Before pushing to Bitbucket repository (or before transferring the project to Back-end department) make sure to run `production` bundle.
-2. Always restart task (e.g. `development`) after adding a new chunk.
-3. Ensure all of your Public API's has both `init` and `destroy` methods.
+2. Ensure all of your Public API's has both `init` and `destroy` methods.<% if (splitting) { %>
+3. Always restart task (e.g. `development`) after adding a new chunk.<% } %>
 
 ## Built with
 

@@ -22,6 +22,7 @@ gulp.task('pug-compile', () => compileHtml('src/template/pages/*.pug', './www/')
 gulp.task('pug-watch', () => {
   gulp.watch('src/template/**/*.pug', ['pug-compile']);
 });<% if (splitting) { %>
+
 /**
  * Watch for changes in webpack-chunk-manifest file.
  * Re-compile HTML on change.
@@ -56,8 +57,9 @@ const pugOptions = {
  */
 function compileHtml(src, dest) {<% if (splitting) { %>
   pugOptions.data.webpackManifest =
-    JSON.parse(fs.readFileSync(config.chunkManifestPath, 'utf8'));<% } %>
+    JSON.parse(fs.readFileSync(config.chunkManifestPath, 'utf8'));
 
+  <% } %>
   return gulp.src([src])
     .pipe(plumber(config.plumberOptions))
     .pipe(pug(pugOptions))

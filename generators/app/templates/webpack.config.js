@@ -27,12 +27,10 @@ module.exports = {
       name: 'js/index.jquery',
       minChunks: Infinity,
     }),<% } %>
-
     new WebpackMd5Hash(),
 
-    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),<% if (splitting) { %>,
 
-    <% if (splitting) { %>,
     new ChunkManifestPlugin({
       filename: 'webpack-chunk-manifest.json',
       manifestVariable: 'webpackManifest',

@@ -2,6 +2,7 @@
 
 const Generator = require('yeoman-generator');
 const chalk     = require('chalk');
+const mkdirp    = require('mkdirp');
 const path      = require('path');
 const fs        = require('fs');
 const yosay     = require('yosay');
@@ -37,11 +38,11 @@ class VintageFrontend extends Generator {
             return 'Project name should only consist of 0~9, a~z, A~Z, _, .';
           }
 
-          const fs = require('fs');
           if (!fs.existsSync(this.destinationPath(name))) {
             return true;
           }
-          if (require('fs').statSync(this.destinationPath(name)).isDirectory()) {
+
+          if (fs.statSync(this.destinationPath(name)).isDirectory()) {
             return 'Project already exist';
           }
 
@@ -103,11 +104,15 @@ class VintageFrontend extends Generator {
 
   writing() {
     const props  = this.props;
+    /*const copy = (input, output) =>
+      this.fs.copy(this.templatePath(input), this.destinationPath(output));
+    const template = (input, output) =>
+      this.fs.copyTpl(this.templatePath(input), this.destinationPath(output), props);*/
 
     props._ = { kebabCase: _.kebabCase };
 
     // static files
-    this.fs.copy(this.templatePath('gitignore'), this.destinationPath('gitignore'));
+    this.fs.copy(this.templatePath('gitignore'), this.destinationPath('.gitignore'));
     this.fs.copy(this.templatePath('gulpfile.js'), this.destinationPath('gulpfile.js'));
     this.fs.copy(this.templatePath('jsdoc.json'), this.destinationPath('jsdoc.json'));
     this.fs.copy(this.templatePath('rules.jscsrc'), this.destinationPath('rules.jscsrc'));
@@ -146,10 +151,17 @@ class VintageFrontend extends Generator {
       this.destinationPath('gulp/tasks/templates.js'), props);
 
     // copy source directory
-    this.fs.copy(this.templatePath('src'), this.destinationPath('src'));
+    this.fs.copyTpl(this.templatePath('src'), this.destinationPath('src'), props);
 
     // copy output directory
     this.fs.copy(this.templatePath('www'), this.destinationPath('www'));
+
+    // create folders for images and fonts
+    mkdirp.sync(this.destinationPath('www/fonts'));
+    mkdirp.sync(this.destinationPath('www/img'));
+
+    // remove unnecessary
+    this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
   }
 
   install() {
@@ -161,7 +173,7 @@ class VintageFrontend extends Generator {
   }
 
   end() {
-    this.log(chalk.green('\nProject is generated. Happy coding!'));
+    this.log(chalk.green('\n\nProject is generated. Happy coding!\n\n'));
   }
 }
 
