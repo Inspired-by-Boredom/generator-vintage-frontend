@@ -5,7 +5,22 @@ module.exports = [
     type: 'input',
     name: 'name',
     message: 'Project name:',
-    default: 'app'
+    default: 'my-app',
+    validate: name => {
+      if (!/\w+/.test(name)) {
+        return 'Project name should only consist of 0~9, a~z, A~Z, _, .';
+      }
+
+      const fs = require('fs');
+      if (!fs.existsSync(this.destinationPath(name))) {
+        return true;
+      }
+      if (require('fs').statSync(this.destinationPath(name)).isDirectory()) {
+        return 'Project already exist';
+      }
+
+      return true;
+    }
   },
   {
     type: 'confirm',

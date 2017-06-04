@@ -1,6 +1,6 @@
 {
   "name": "generator-vintage-frontend",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Modern front-end workflow generator",
   "homepage": "https://github.com/Vintage-web-production/generator-vintage-frontend",
   "repository": "Vintage-web-production/generator-vintage-frontend",
@@ -28,9 +28,6 @@
     "generator-vintage-frontend": "^0.1.22",
     "global": "^4.3.2",
     "lodash": "^4.17.4",
-    "mkdirp": "^0.5.1",
-    "string-length": "^1.0.1",
-    "update-notifier": "^2.1.0",
     "yeoman-generator": "^1.1.1",
     "yosay": "^2.0.0"
   }

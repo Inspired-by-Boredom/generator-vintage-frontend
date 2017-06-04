@@ -19,12 +19,26 @@ class VintageFrontend extends Generator {
 
     return this
       .prompt(prompts)
-      .then(answers => this.props = answers);
+      .then(answers => this.props = this.answers = answers);
+  }
+
+  configuring() {
+    const path = require('path');
+    const fs   = require('fs');
+    const done = this.async();
+
+    fs.exists(this.destinationPath(this.answers.name), exists => {
+      if (exists && fs.statSync(this.destinationPath(this.answers.name)).isDirectory()) {
+        this.log.error(`Directory [${this.answers.name}] exists`);
+        process.exit(1);
+      }
+      this.destinationRoot(path.join(this.destinationRoot(), this.answers.name));
+      done();
+    });
   }
 
   writing() {
     const _      = require('lodash');
-    const mkdirp = require('mkdirp');
     const props  = this.props;
 
     props._ = { kebabCase: _.kebabCase };
@@ -53,10 +67,8 @@ class VintageFrontend extends Generator {
       this.destinationPath('gulp/config.js'), props);
 
     // gulp tasks
-    this.fs.copy(this.templatePath('gulp/tasks/sprite-svg/_svg.scss'),
-      this.destinationPath('gulp/tasks/sprite-svg/_svg.scss'));
-    this.fs.copy(this.templatePath('gulp/tasks/sprite-svg/sprite-svg.js'),
-      this.destinationPath('gulp/tasks/sprite-svg/sprite-svg.js'));
+    this.fs.copy(this.templatePath('gulp/tasks/sprite-svg'),
+      this.destinationPath('gulp/tasks/sprite-svg'));
     this.fs.copyTpl(this.templatePath('gulp/tasks/default.js'),
       this.destinationPath('gulp/tasks/default.js'), props);
     this.fs.copy(this.templatePath('gulp/tasks/docs.js'),
