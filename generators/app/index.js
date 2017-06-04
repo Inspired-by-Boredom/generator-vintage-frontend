@@ -52,19 +52,19 @@ class VintageFrontend extends Generator {
       {
         type: 'input',
         name: 'description',
-        message: 'Project description',
+        message: 'Project description:',
         default: ''
       },
       {
         type: 'input',
         name: 'username',
-        message: 'Your name',
+        message: 'Your name:',
         default: this.username
       },
       {
         type: 'input',
         name: 'email',
-        message: 'Your email',
+        message: 'Your email:',
         default: ''
       },
       {
@@ -156,24 +156,27 @@ class VintageFrontend extends Generator {
     // copy output directory
     this.fs.copy(this.templatePath('www'), this.destinationPath('www'));
 
-    // create folders for images and fonts
-    mkdirp.sync(this.destinationPath('www/fonts'));
-    mkdirp.sync(this.destinationPath('www/img'));
+    // create folders for images, fonts, scripts
+    mkdirp.sync(this.destinationPath('www/static/fonts'));
+    mkdirp.sync(this.destinationPath('www/static/img'));
+    mkdirp.sync(this.destinationPath('www/static/js'));
 
     // remove unnecessary
-    this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
+    if (!props.jquery) {
+      this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
+    }
   }
 
   install() {
     if (this.props.install) {
       this.installDependencies();
     } else {
-      this.log(`Run ${chalk.blue('yarn / npm install')} to install dependencies later`);
+      this.log(`\nRun ${chalk.yellow('yarn / npm install')} to install dependencies later`);
     }
   }
 
   end() {
-    this.log(chalk.green('\n\nProject is generated. Happy coding!\n\n'));
+    this.log(chalk.green(`\n\nProject '${props.name}' is generated. Happy coding!\n`));
   }
 }
 

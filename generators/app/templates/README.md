@@ -63,8 +63,7 @@ Build production bundle (build '.min' files, prettify html)
 
 ```
 npm run production
-```
-<% if (splitting) { %>
+```<% if (splitting) { %>
 
 ## Code splitting
 
@@ -82,12 +81,11 @@ require.ensure([], require => {
 
 }, 'chunkFileName');
 ```
-<% } %>
 
 ##### Warning!
 
 You should restart task (e.g. `development`) after adding a new chunk.
-[Issue #26](https://github.com/soundcloud/chunk-manifest-webpack-plugin/issues/26)
+[Issue #26](https://github.com/soundcloud/chunk-manifest-webpack-plugin/issues/26)<% } %>
 
 ## Public API
 

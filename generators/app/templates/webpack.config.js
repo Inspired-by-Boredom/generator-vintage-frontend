@@ -21,8 +21,7 @@ module.exports = {
   },
 
   // Webpack's plugins
-  plugins: [
-    <% if (jquery) { %>
+  plugins: [<% if (jquery) { %>
     new webpack.optimize.CommonsChunkPlugin({
       name: 'js/index.jquery',
       minChunks: Infinity,

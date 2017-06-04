@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home page</title>
-    <link href="static/css/index.min.css" rel="stylesheet">
+    <link href="static/css/index.css" rel="stylesheet">
     <link rel="icon" href="static/favicon.ico"> </head>
   <body>
     <!-- SVG-->
@@ -59,8 +59,8 @@
     </main>
     <!-- Footer-->
     <footer></footer>
-    <!-- Scripts-->
-    <script src="static/js/index.jquery.min.js"></script>
-    <script src="static/js/index.min.js"></script>
+    <!-- Scripts--><% if (jquery) { %>
+    <script src="static/js/index.jquery.js"></script><% } %>
+    <script src="static/js/index.js"></script>
   </body>
 </html>
