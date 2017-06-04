@@ -1,6 +1,6 @@
 'use strict';
 
-const Generator  = require('yeoman-generator');
+const generators = require('yeoman-generator');
 const chalk      = require('chalk');
 const yosay      = require('yosay');
 const prompts    = require('./prompts');
