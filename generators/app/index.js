@@ -1,7 +1,11 @@
 'use strict';
 
-const Generator  = require('yeoman-generator');
-const chalk      = require('chalk');
+const Generator = require('yeoman-generator');
+const chalk     = require('chalk');
+const path      = require('path');
+const fs        = require('fs');
+const yosay     = require('yosay');
+const _         = require('lodash');
 
 class VintageFrontend extends Generator {
 
@@ -9,22 +13,82 @@ class VintageFrontend extends Generator {
     super(args, opts);
   }
 
-  prompting() {
-    const yosay   = require('yosay');
-    const prompts = require('./prompts');
+  initializing() {
+    try {
+      this.username = process.env.USER || process.env.USERPROFILE.split(path.sep)[2];
+    } catch (e) {
+      this.username = '';
+    }
+  }
 
+  prompting() {
     this.log(yosay(
       `Vintage Web Production ${chalk.yellow('vintage-frontend')} generator`
     ));
 
-    return this
-      .prompt(prompts)
+    return this.prompt([
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Project name:',
+        default: 'my-app',
+        validate: name => {
+          if (!/\w+/.test(name)) {
+            return 'Project name should only consist of 0~9, a~z, A~Z, _, .';
+          }
+
+          const fs = require('fs');
+          if (!fs.existsSync(this.destinationPath(name))) {
+            return true;
+          }
+          if (require('fs').statSync(this.destinationPath(name)).isDirectory()) {
+            return 'Project already exist';
+          }
+
+          return true;
+        }
+      },
+      {
+        type: 'input',
+        name: 'description',
+        message: 'Project description',
+        default: ''
+      },
+      {
+        type: 'input',
+        name: 'username',
+        message: 'Your name',
+        default: this.username
+      },
+      {
+        type: 'input',
+        name: 'email',
+        message: 'Your email',
+        default: ''
+      },
+      {
+        type: 'confirm',
+        name: 'jquery',
+        message: 'Your project will include jQuery?',
+        default: true
+      },
+      {
+        type: 'confirm',
+        name: 'splitting',
+        message: 'Enable code splitting?',
+        default: false
+      },
+      {
+        type: 'confirm',
+        name: 'install',
+        message: 'Install dependencies right now?',
+        default: true
+      }
+    ])
       .then(answers => this.props = this.answers = answers);
   }
 
   configuring() {
-    const path = require('path');
-    const fs   = require('fs');
     const done = this.async();
 
     fs.exists(this.destinationPath(this.answers.name), exists => {
@@ -38,7 +102,6 @@ class VintageFrontend extends Generator {
   }
 
   writing() {
-    const _      = require('lodash');
     const props  = this.props;
 
     props._ = { kebabCase: _.kebabCase };
