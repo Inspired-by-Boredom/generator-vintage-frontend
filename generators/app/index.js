@@ -116,7 +116,7 @@ class VintageFrontend extends Generator {
     // templates
     this.fs.copyTpl(this.templatePath('README.md'),
       this.destinationPath('README.md'), props);
-    this.fs.copyTpl(this.templatePath('package.json'),
+    this.fs.copyTpl(this.templatePath('package.json_vm'),
       this.destinationPath('package.json'), props);
     this.fs.copyTpl(this.templatePath('webpack.config.js'),
       this.destinationPath('webpack.config.js'), props);
