@@ -104,10 +104,10 @@ class VintageFrontend extends Generator {
 
   writing() {
     const props  = this.props;
-    /*const copy = (input, output) =>
+    const copy = (input, output) =>
       this.fs.copy(this.templatePath(input), this.destinationPath(output));
     const template = (input, output) =>
-      this.fs.copyTpl(this.templatePath(input), this.destinationPath(output), props);*/
+      this.fs.copyTpl(this.templatePath(input), this.destinationPath(output), props);
 
     props._ = { kebabCase: _.kebabCase };
 
@@ -154,7 +154,7 @@ class VintageFrontend extends Generator {
     this.fs.copyTpl(this.templatePath('src'), this.destinationPath('src'), props);
 
     // copy output directory
-    this.fs.copy(this.templatePath('www'), this.destinationPath('www'));
+    this.fs.copyTpl(this.templatePath('www'), this.destinationPath('www'), props);
 
     // create folders for images, fonts, scripts
     mkdirp.sync(this.destinationPath('www/static/fonts'));
@@ -169,7 +169,8 @@ class VintageFrontend extends Generator {
 
   install() {
     if (this.props.install) {
-      this.installDependencies();
+      this.npmInstall();
+
     } else {
       this.log(`\nRun ${chalk.yellow('yarn / npm install')} to install dependencies later`);
     }
