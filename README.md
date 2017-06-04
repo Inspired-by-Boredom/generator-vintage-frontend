@@ -21,7 +21,7 @@ Yeoman generator for modern front-end apps.
 
 > Answer questions
 
-![](http://i.imgur.com/NssMS9y.png)
+![vintage-frontend installation](http://i.imgur.com/NssMS9y.png "vintage-frontend questions")
 
 Done!
 
