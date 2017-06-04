@@ -10,12 +10,12 @@ Yeoman generator for modern front-end apps.
 ##### Install [yeoman](http://yeoman.io/):
 `npm install -g yo`
 
-##### Install _generator-vintage-frontend_:
+##### Install [generator-vintage-frontend](https://www.npmjs.com/package/generator-vintage-frontend):
 `npm install -g generator-vintage-frontend`
 
 > prepend with `sudo` if you are running on `*nix` OS.
 
-## Use `generator-vintage-frontend` ##
+## Use generator-vintage-frontend ##
 
 `yo vintage-frontend`
 
