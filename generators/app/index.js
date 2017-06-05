@@ -119,7 +119,7 @@ class VintageFrontend extends Generator {
     copy('yarn.lock');
 
     // static files (templates)
-    template('README.md');
+    template('README.md_vm', 'README.md');
     template('package.json_vm', 'package.json');
     template('webpack.config.js');
     if (props.splitting) {

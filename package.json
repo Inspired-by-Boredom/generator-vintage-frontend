@@ -1,6 +1,6 @@
 {
   "name": "generator-vintage-frontend",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Modern front-end workflow generator",
   "homepage": "https://github.com/Vintage-web-production/generator-vintage-frontend",
   "repository": "Vintage-web-production/generator-vintage-frontend",
@@ -8,7 +8,6 @@
   "keywords": [
     "yeoman-generator",
     "Yeoman front-end generator",
-    "Frond-end",
     "Front-end workflow",
     "ES6",
     "SASS",
