@@ -9,6 +9,6 @@ const jsdoc = require('gulp-jsdoc3');
  */
 gulp.task('JSDocs', function (cb) {
   gulp
-    .src(['README.md_vm', './src/js/**/*.js'], { read: false })
+    .src(['read.md_vm', './src/js/**/*.js'], { read: false })
     .pipe(jsdoc(cb));
 });
