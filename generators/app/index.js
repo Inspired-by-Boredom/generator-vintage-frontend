@@ -86,7 +86,7 @@ class VintageFrontend extends Generator {
         default: true
       }
     ])
-      .then(answers => this.props = this.answers = answers);
+      .then(answers => this.answers = answers);
   }
 
   configuring() {
@@ -103,7 +103,7 @@ class VintageFrontend extends Generator {
   }
 
   writing() {
-    const props  = this.props;
+    const props  = this.answers;
     const copy = (input, output = input) =>
       this.fs.copy(this.templatePath(input), this.destinationPath(output));
     const template = (input, output = input) =>
@@ -161,7 +161,7 @@ class VintageFrontend extends Generator {
   }
 
   install() {
-    if (this.props.install) {
+    if (this.answers.install) {
       this.npmInstall();
 
     } else {
@@ -170,7 +170,7 @@ class VintageFrontend extends Generator {
   }
 
   end() {
-    this.log(chalk.green(`\n\nProject '${this.props.name}' is generated. Happy coding!\n`));
+    this.log(chalk.green(`\n\nProject '${this.answers.name}' generated. Happy coding!\n`));
   }
 }
 
