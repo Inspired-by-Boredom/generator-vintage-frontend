@@ -3,8 +3,8 @@
   "version": "0.1.1",
   "description": "<%= description %>",
   "scripts": {
-    "development": "cross-env NODE_ENV=development gulp default",
-    "production": "cross-env NODE_ENV=production gulp default",
+    "development": "cross-env NODE_ENV=development gulp",
+    "production": "cross-env NODE_ENV=production gulp",
     "compileDocs": "jsdoc ./src -r -d docs -c jsdoc.json",
     "openDocs": "start ./docs/index.html"
   },<% if (jquery) { %>
