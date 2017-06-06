@@ -41,7 +41,7 @@ npm run production
 
 ## License ##
 
-MIT © [Vitali Shapovalov](https://github.com/vitalishapovalov)
+[MIT License](https://github.com/Vintage-web-production/generator-vintage-frontend/blob/master/LICENSE)
 
 [npm-url]: https://www.npmjs.com/package/generator-vintage-frontend
 [npm-image]: https://badge.fury.io/js/generator-vintage-frontend.svg
