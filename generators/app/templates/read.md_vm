@@ -124,10 +124,9 @@ npm run-script openDocs
 
 * [Gulp](http://gulpjs.com/)
 * [Pug](https://github.com/pugjs/pug)
-* [Webpack 2.2](https://webpack.js.org/)
+* [Webpack](https://webpack.js.org/)
 * [Sass](http://sass-lang.com/)
 * [Babel](https://babeljs.io/)
-* [Browsersync](https://www.browsersync.io/)
 
 ## Versioning
 
