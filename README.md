@@ -3,7 +3,9 @@
 [![NPM version][npm-image]][npm-url]
 ![][license-url]
 
-Yeoman generator for modern front-end apps. Use [vintage-cli](https://github.com/vintage-web-production/vintage-cli/) to update generated project.
+Yeoman generator for modern front-end apps.
+
+It is recommended to use [vintage-cli](https://github.com/vintage-web-production/vintage-cli/) for updating/running/building generated project.
 
 ## Prerequisites ##
 

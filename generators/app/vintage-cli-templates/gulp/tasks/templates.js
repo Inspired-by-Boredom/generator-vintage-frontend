@@ -5,7 +5,6 @@ const pug            = require('gulp-pug');
 const prettify       = require('gulp-prettify');
 const pugIncludeGlob = require('pug-include-glob');
 const plumber        = require('gulp-plumber');
-const gulpif         = require('gulp-if');
 const config         = require('../config');
 
 /**
@@ -29,7 +28,6 @@ gulp.task('pug-watch', () => {
  * @type {Object}
  */
 const pugOptions = {
-  pretty: config.production,
   nspaces: 4,
   tabs: true,
   donotencode: true,
@@ -50,7 +48,7 @@ function compileHtml(src, dest) {
   return gulp.src([src])
     .pipe(plumber(config.plumberOptions))
     .pipe(pug(pugOptions))
-    .pipe(gulpif(config.production, prettify()))
+    .pipe(prettify())
     .pipe(gulp.dest(dest));
 }
 
