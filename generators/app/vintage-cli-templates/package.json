@@ -1,5 +1,5 @@
 {
-  "version": "0.6.3",
+  "version": "0.6.4",
   "scripts": {
     "development": "cross-env NODE_ENV=development gulp",
     "production": "cross-env NODE_ENV=production gulp",
