@@ -4,8 +4,7 @@ const gulp           = require('gulp');
 const pug            = require('gulp-pug');
 const prettify       = require('gulp-prettify');
 const pugIncludeGlob = require('pug-include-glob');
-const plumber        = require('gulp-plumber');
-const gulpif         = require('gulp-if');<% if (splitting) { %>
+const plumber        = require('gulp-plumber');<% if (splitting) { %>
 const fs             = require('fs');<% } %>
 const config         = require('../config');
 
@@ -38,7 +37,6 @@ gulp.task('chunk-watch', () => {
  * @type {Object}
  */
 const pugOptions = {
-  pretty: config.production,
   nspaces: 4,
   tabs: true,
   donotencode: true,
@@ -61,7 +59,7 @@ function compileHtml(src, dest) {<% if (splitting) { %>
   return gulp.src([src])
     .pipe(plumber(config.plumberOptions))
     .pipe(pug(pugOptions))
-    .pipe(gulpif(config.production, prettify()))
+    .pipe(prettify())
     .pipe(gulp.dest(dest));
 }
 
