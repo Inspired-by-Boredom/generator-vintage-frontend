@@ -117,6 +117,7 @@ class VintageFrontend extends Generator {
     copy('jsdoc.json');
     copy('rules.jscsrc');
     copy('yarn.lock');
+    copy('vintage-frontend.json');
 
     // static files (templates)
     template('read.md_vm', 'README.md');
