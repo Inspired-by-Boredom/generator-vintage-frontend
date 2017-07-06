@@ -121,7 +121,7 @@ class VintageFrontend extends Generator {
 
     // static files (templates)
     template('read.md_vm', 'README.md');
-    template('package.json', 'package.json');
+    template('package.json_vm', 'package.json');
     template('webpack.config.js');
     if (props.splitting) {
       copy('webpack-chunk-manifest.json', 'www/static/webpack-chunk-manifest.json');

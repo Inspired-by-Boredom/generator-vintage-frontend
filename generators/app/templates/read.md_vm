@@ -127,7 +127,3 @@ npm run-script openDocs
 * [Webpack](https://webpack.js.org/)
 * [Sass](http://sass-lang.com/)
 * [Babel](https://babeljs.io/)
-
-## Versioning
-
-Current version is 0.6.4
