@@ -8,8 +8,8 @@ module.exports = {
 
   // Entry point
   entry: {
-    'js/index': './src/js/index',
-    'js/index.jquery': './src/js/index.jquery'
+    'js/index': './src/js/index'<% if (jquery) { %>,
+    'js/index.jquery': './src/js/index.jquery'<% } %>
   },
 
   // Output settings
@@ -18,11 +18,11 @@ module.exports = {
   },
 
   // Webpack's plugins
-  plugins: [
+  plugins: [<% if (jquery) { %>
     new webpack.optimize.CommonsChunkPlugin({
       name: 'js/index.jquery',
       minChunks: Infinity,
-    }),
+    }),<% } %>
     new WebpackMd5Hash(),
 
     new webpack.NoEmitOnErrorsPlugin()
@@ -47,11 +47,11 @@ module.exports = {
         options: {
           presets: ['es2015', 'stage-2']
         }
-      },
+      }<% if (jquery) { %>,
       {
         test: require.resolve('jquery'),
         loader: 'expose-loader?jQuery!expose-loader?$'
-      }
+      }<% } %>
     ]
   }
 };

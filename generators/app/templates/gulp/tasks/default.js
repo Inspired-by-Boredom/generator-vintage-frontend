@@ -9,10 +9,7 @@ const config      = require('../config');
  */
 if (config.development) {
   // Start livereload (browsersync) server.
-  config.tasksArray.push('livereload');<% if (splitting) { %>
-
-  // Update html when webpack-chunk-manifest changes.
-  config.tasksArray.push('chunk-watch');<% } %>
+  config.tasksArray.push('livereload');
 }
 
 /**

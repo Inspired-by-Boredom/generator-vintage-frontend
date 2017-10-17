@@ -1,14 +1,17 @@
 {
+  "name": "<%= _.kebabCase(name) %>",
   "version": "0.6.5",
+  "description": "<%= description %>",
   "scripts": {
     "development": "cross-env NODE_ENV=development gulp",
     "production": "cross-env NODE_ENV=production gulp",
     "compileDocs": "jsdoc ./src -r -d docs -c jsdoc.json",
     "openDocs": "start ./docs/index.html"
-  },
+  },<% if (jquery) { %>
   "dependencies": {
     "jquery": "^2.2.4"
-  },
+  },<% } %>
+  "author": "<%= username %><% if(email){ %> <<%= email %>><% } %>",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
     "babel-core": "^6.11.4",

@@ -37,18 +37,7 @@ const webpackConfig = require('../webpack.config.js');
  */
 const plumberOptions = {
   errorHandler: notify.onError(error => `Error: ${error.message}`)
-};<% if (splitting) { %>
-
-/**
- * Path to the file with chunks data.
- * Used when compiling HTML. Creates global js variable in project.
- * Variable is named 'window.webpackManifest'.
- * Contains path to all chunks generated with Webpack.
- *
- * @constant
- * @type {string}
- */
-const chunkManifestPath = 'www/static/webpack-chunk-manifest.json';<% } %>
+};
 
 /**
  * Set environment.
@@ -91,8 +80,7 @@ const tasks = {
 module.exports = {
   cssPreprocessorExtension,
   webpackConfig,
-  browsers,<% if (splitting) { %>
-  chunkManifestPath,<% } %>
+  browsers,
   plumberOptions,
 
   development: bundle.development,

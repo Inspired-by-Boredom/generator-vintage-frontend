@@ -7,14 +7,13 @@
  */
 
 /** Import initialized-by-default modules/libs */
-import './components/common';
-import './components/publicAPI';
+import './components/Common';
+import './components/PublicAPI';
 
 /** Import page controllers */
-import Home from './pages/home';
+import Home from './pages/Home';
 
-/** Import utils */
-import { currentPage } from './modules/dev/helpers';
+import { currentPage } from './modules/dev/_helpers';
 
 /**
  * Run appropriate scripts for each page.

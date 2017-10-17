@@ -30,8 +30,7 @@ if (config.production) {
       compress: { unsafe: true }
     })
   );
-  webpackConfig.output.filename = '[name].min.js';<% if (splitting) { %>
-  webpackConfig.output.chunkFilename = 'js/chunks/[name]-[chunkhash].min.js';<% } %>
+  webpackConfig.output.filename = '[name].min.js';
 }
 
 /**

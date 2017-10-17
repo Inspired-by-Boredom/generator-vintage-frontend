@@ -4,8 +4,7 @@ const gulp           = require('gulp');
 const pug            = require('gulp-pug');
 const prettify       = require('gulp-prettify');
 const pugIncludeGlob = require('pug-include-glob');
-const plumber        = require('gulp-plumber');<% if (splitting) { %>
-const fs             = require('fs');<% } %>
+const plumber        = require('gulp-plumber');
 const config         = require('../config');
 
 /**
@@ -20,15 +19,7 @@ gulp.task('pug-compile', () => compileHtml('src/template/pages/*.pug', './www/')
  */
 gulp.task('pug-watch', () => {
   gulp.watch('src/template/**/*.pug', ['pug-compile']);
-});<% if (splitting) { %>
-
-/**
- * Watch for changes in webpack-chunk-manifest file.
- * Re-compile HTML on change.
- */
-gulp.task('chunk-watch', () => {
-  gulp.watch('./www/static/webpack-chunk-manifest.json', ['pug-compile']);
-});<% } %>
+});
 
 /**
  * Set default pug options.
@@ -52,10 +43,7 @@ const pugOptions = {
  * @param {String} src
  * @param {String} dest
  */
-function compileHtml(src, dest) {<% if (splitting) { %>
-  pugOptions.data.webpackManifest =
-    JSON.parse(fs.readFileSync(config.chunkManifestPath, 'utf8'));<% } %>
-
+function compileHtml(src, dest) {
   return gulp.src([src])
     .pipe(plumber(config.plumberOptions))
     .pipe(pug(pugOptions))

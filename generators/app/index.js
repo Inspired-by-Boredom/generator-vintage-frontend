@@ -75,12 +75,6 @@ class VintageFrontend extends Generator {
       },
       {
         type: 'confirm',
-        name: 'splitting',
-        message: 'Enable code splitting?',
-        default: false
-      },
-      {
-        type: 'confirm',
         name: 'install',
         message: 'Install dependencies right now?',
         default: true
@@ -116,16 +110,12 @@ class VintageFrontend extends Generator {
     copy('gulpfile.js');
     copy('jsdoc.json');
     copy('rules.jscsrc');
-    copy('yarn.lock');
     copy('vintage-frontend.json');
 
     // static files (templates)
-    template('read.md_vm', 'README.md');
-    template('package.json_vm', 'package.json');
-    template('webpack.config.js');
-    if (props.splitting) {
-      copy('webpack-chunk-manifest.json', 'www/static/webpack-chunk-manifest.json');
-    }
+    template('README.md_t', 'README.md');
+    template('package.json_t', 'package.json');
+    template('webpack.config.js_t', 'webpack.config.js');
 
     // gulp config
     template('gulp/config.js');
@@ -155,9 +145,6 @@ class VintageFrontend extends Generator {
     // remove unnecessary
     if (!props.jquery) {
       this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
-    }
-    if (!props.splitting) {
-      this.fs.delete(this.destinationPath('src/js/components/chunkExample.js'));
     }
   }
 
