@@ -23,7 +23,7 @@ It is recommended to use [vintage-cli](https://github.com/vintage-web-production
 
 > Answer questions
 
-![vintage-frontend installation](http://i.imgur.com/NssMS9y.png "vintage-frontend questions")
+![vintage-frontend installation](http://i.imgur.com/otj25Xa.jpg "vintage-frontend questions")
 
 Done!
 
@@ -45,6 +45,6 @@ npm run production
 
 [MIT License](https://github.com/Vintage-web-production/generator-vintage-frontend/blob/master/LICENSE)
 
-[npm-url]: https://www.npmjs.com/package/vintage-cli
+[npm-url]: https://www.npmjs.com/package/generator-vintage-frontend
 [npm-image]: https://badge.fury.io/js/generator-vintage-frontend.svg
 [license-url]: https://img.shields.io/npm/l/express.svg
