@@ -1,5 +1,5 @@
 /**
- * Website's public API.
+ * Website's public API (example).
  * Make some functions and methods accessible in global scope.
  *
  * @module PublicAPI
@@ -9,7 +9,7 @@ import Timer from './Timer';
 
 export class PublicAPI {
   /**
-   * Some of Timer's public methods.
+   * Some of 'Timer' module public methods.
    *
    * PublicAPI.timer.init() - initialize timer
    * PublicAPI.timer.stop() - stop timer
@@ -18,8 +18,8 @@ export class PublicAPI {
    */
   static get Timer() {
     return {
-      init: Timer.startTimer,
-      stop: Timer.stopTimer
+      init: ::Timer.startTimer,
+      stop: ::Timer.stopTimer
     };
   }
 }

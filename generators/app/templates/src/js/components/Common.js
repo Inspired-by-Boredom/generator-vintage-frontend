@@ -1,5 +1,5 @@
 /**
- * Website's common scripts.
+ * Website's common scripts (example).
  *
  * @module Common
  */
@@ -9,11 +9,10 @@ export class Common {
    * Cache data, make preparations and initialize common scripts.
    */
   constructor() {
-    // cache data, make preparations etc.
     this.messages = {
-      constructor: 'Common: constructing...',
-      init: 'Common: initializing...',
-      example: 'Common: Example message!'
+      constructor: 'Common.js: constructor()...',
+      init: 'Common.js: init()...',
+      example: 'Common.js: example()...'
     };
 
     console.log(this.messages.constructor);

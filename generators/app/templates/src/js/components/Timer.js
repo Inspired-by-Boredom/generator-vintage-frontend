@@ -1,5 +1,5 @@
 /**
- * Example component
+ * Example component (delete on prod)
  *
  * @module Timer
  */
@@ -18,16 +18,6 @@ export class Timer {
   _timerInterval = null;
 
   /**
-   * Start countdown
-   *
-   * @public
-   * @this Timer
-   */
-  startTimer = () => {
-    this._timerInterval = setInterval(() => console.log(`Timer: ${this._counter++}`), 1000);
-  };
-
-  /**
    * Set current time
    *
    * @public
@@ -36,6 +26,16 @@ export class Timer {
    */
   setTimer = (time) => {
     this._counter = time;
+  };
+
+  /**
+   * Start countdown
+   *
+   * @public
+   * @this Timer
+   */
+  startTimer = () => {
+    this._timerInterval = setInterval(() => console.log(`Timer: ${this._counter++}`), 1000);
   };
 
   /**
