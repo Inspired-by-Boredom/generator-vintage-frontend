@@ -1,0 +1,83 @@
+{{!SAMPLE_PAGE}}
+<!DOCTYPE html>
+<html lang='en'>
+{{!Head}}
+<head>
+  {{> ../components/_head}}
+  <title>{{data_home.title}}</title>
+</head>
+<body>
+  {{!SAMPLE_STYLES_ONLY_FOR_THIS_PAGE}}
+  <style>
+    main {
+      position: relative;
+    }
+    header ul {
+      text-align: center;
+      margin: 50px 0;
+    }
+    header li {
+      display: inline-block;
+      margin: 0 10px;
+    }
+    header li a {
+      display: inline-block;
+      color: #000000;
+    }
+    h1, h4 {
+      text-align: center;
+      margin: 50px 0;
+    }
+    svg.example {
+      display: block;
+      width: 110px;
+      height: 150px;
+      fill: #000000;
+      margin: 0 auto;
+    }
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 25px;
+      text-align: center;
+    }
+    footer a {
+      color: #000000;
+    }
+  </style>
+  {{!header}}
+  {{> ../components/_header}}
+  {{!main_content}}
+  <main data-page='sample'>
+    {{!helpers}}
+    {{> ../components/_helpers}}
+    <h1>{{data_home.sample_title}}</h1>
+    <h4>{{data_home.sample_under_title}}</h4>
+
+    <!-- sample of adding svg image -->
+    <svg class="icon-vintage-logo example">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#icon-vintage-logo"></use>
+    </svg>
+    <!-- ./ sample of adding svg image -->
+
+    <!-- sample of adding section -->
+    {{> sections/sample_section}}
+    <!-- ./ sample of adding section -->
+
+    </div>
+  </main>
+  {{!footer}}
+  {{> ../components/_footer}}
+  {{!scripts}}
+  {{> ../components/_scripts}}
+</body>
+</html>
+
+
+
+
+
+
+
