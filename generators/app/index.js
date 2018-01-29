@@ -140,13 +140,13 @@ class VintageFrontend extends Generator {
     template('gulp/config.js', 'gulp/config.js');
 
     // gulp tasks
-    copy('pug/gulp/tasks/sprite-svg',    'gulp/tasks/sprite-svg');
-    copy('pug/gulp/tasks/default.js',    'gulp/tasks/default.js');
-    copy('pug/gulp/tasks/docs.js',       'gulp/tasks/docs.js');
-    copy('pug/gulp/tasks/json.js',       'gulp/tasks/json.js');
-    copy('pug/gulp/tasks/livereload.js', 'gulp/tasks/livereload.js');
-    copy('pug/gulp/tasks/scripts.js',    'gulp/tasks/scripts.js');
-    copy('pug/gulp/tasks/styles.js',     'gulp/tasks/styles.js');
+    copy('gulp/tasks/sprite-svg',    'gulp/tasks/sprite-svg');
+    copy('gulp/tasks/default.js',    'gulp/tasks/default.js');
+    copy('gulp/tasks/docs.js',       'gulp/tasks/docs.js');
+    copy('gulp/tasks/json.js',       'gulp/tasks/json.js');
+    copy('gulp/tasks/livereload.js', 'gulp/tasks/livereload.js');
+    copy('gulp/tasks/scripts.js',    'gulp/tasks/scripts.js');
+    copy('gulp/tasks/styles.js',     'gulp/tasks/styles.js');
     copy(
       `gulp/tasks/templates-${props.templateEngine}.js`,
       `gulp/tasks/templates-${props.templateEngine}.js`
@@ -166,7 +166,7 @@ class VintageFrontend extends Generator {
     mkdirp.sync(this.destinationPath('src/js/modules/dep'));
 
     try {
-      const files = fs.readdirSync(this.destinationPath(`www/src/template/${props.templateEngine}`));
+      const files = fs.readdirSync(this.templatePath(`www/src/template/${props.templateEngine}`));
       files.forEach((file) => {
         fs.copyFileSync(file, this.destinationPath('www/src/template'))
       });
@@ -180,6 +180,14 @@ class VintageFrontend extends Generator {
     // optional actions
     if (!props.jquery) {
       this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
+    }
+
+    if (props.isPug) {
+      try {
+        fs.unlinkSync(this.destinationPath('gulp/tasks/json.js'));
+      } catch (e) {
+        console.error(`Error while deleting 'json.js' file, please remove it by yourself: ${e.message}`);
+      }
     }
 
     if (!props.isPug) {

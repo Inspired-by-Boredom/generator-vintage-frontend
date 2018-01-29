@@ -9,7 +9,7 @@ const svgStore    = require('gulp-svgstore');
 const rename      = require('gulp-rename');
 const through2    = require('through2');
 const runSequence = require('run-sequence');
-const config      = require('../../../mustache/gulp/config');
+const config      = require('../../config');
 
 /**
  * Default SVG task.

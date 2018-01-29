@@ -4,7 +4,7 @@ const gulp           = require('gulp');
 const plumber        = require('gulp-plumber');
 const Webpack        = require('webpack');
 const webpackStream  = require('webpack-stream');
-const config         = require('../../mustache/gulp/config');
+const config         = require('../config');
 const webpackConfig  = config.webpackConfig;
 
 /**

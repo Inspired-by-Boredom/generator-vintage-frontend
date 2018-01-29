@@ -9,7 +9,7 @@ const plumber      = require('gulp-plumber');
 const gulpif       = require('gulp-if');
 const autoprefixer = require('autoprefixer');
 const mqpacker     = require('css-mqpacker');
-const config       = require('../../mustache/gulp/config');
+const config       = require('../config');
 
 /**
  * Default CSS task.

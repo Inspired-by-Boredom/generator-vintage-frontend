@@ -2,7 +2,7 @@
 
 const gulp        = require('gulp');
 const runSequence = require('run-sequence');
-const config      = require('../../mustache/gulp/config');
+const config      = require('../config');
 
 /**
  * Tasks which being run only during development.

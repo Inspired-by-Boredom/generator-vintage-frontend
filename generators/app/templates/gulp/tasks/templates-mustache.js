@@ -6,7 +6,7 @@ const mustache    = require('gulp-mustache');
 const prettify    = require('gulp-prettify');
 const gulpif      = require('gulp-if');
 const runSequence = require('run-sequence');
-const config      = require('../../mustache/gulp/config');
+const config      = require('../config');
 
 /**
  * @constant
