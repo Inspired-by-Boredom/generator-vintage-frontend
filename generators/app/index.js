@@ -165,14 +165,11 @@ class VintageFrontend extends Generator {
     mkdirp.sync(this.destinationPath('www/static/css'));
     mkdirp.sync(this.destinationPath('src/js/modules/dep'));
 
+    // Template engine
     try {
-      const files = fs.readdirSync(this.templatePath(`src/template/${props.templateEngine}`));
-      files.forEach((file) => {
-        fs.copyFileSync(file, this.destinationPath('src/template'))
-      });
-
-      fs.unlinkSync(this.destinationPath('src/template/pug'));
-      fs.unlinkSync(this.destinationPath('src/template/mustache'));
+      template(`src/template/${props.templateEngine}`, 'src/template');
+      this.fs.delete(this.destinationPath('src/template/pug'));
+      this.fs.delete(this.destinationPath('src/template/mustache'));
     } catch (e) {
       console.error(`Error while creating template directories: ${e.message}`)
     }
@@ -188,6 +185,7 @@ class VintageFrontend extends Generator {
 
     if (!props.isPug) {
       mkdirp.sync(this.destinationPath('www/static/data'));
+      this.fs.writeJSON(this.destinationPath('www/static/data/combined.json'), {});
     }
   }
 

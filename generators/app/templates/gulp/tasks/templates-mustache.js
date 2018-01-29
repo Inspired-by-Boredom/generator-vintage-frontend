@@ -14,7 +14,7 @@ const config      = require('../config');
  */
 const mustachePaths = config.development
   ? ['src/template/pages/*.mustache', './www/']
-  : ['src/template/**/*.mustache', './www/static/template'];
+  : ['src/template/**/*.mustache', './www/template'];
 
 /**
  * Default HTML task.
