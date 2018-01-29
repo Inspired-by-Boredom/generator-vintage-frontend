@@ -165,6 +165,18 @@ class VintageFrontend extends Generator {
     mkdirp.sync(this.destinationPath('www/static/css'));
     mkdirp.sync(this.destinationPath('src/js/modules/dep'));
 
+    try {
+      const files = fs.readdirSync(this.destinationPath(`www/src/template/${props.templateEngine}`));
+      files.forEach((file) => {
+        fs.copyFileSync(file, this.destinationPath('www/src/template'))
+      });
+
+      fs.unlinkSync(this.destinationPath('www/src/template/pug'));
+      fs.unlinkSync(this.destinationPath('www/src/template/mustache'));
+    } catch (e) {
+      console.error(`Error while creating template directories: ${e.message}`)
+    }
+
     // optional actions
     if (!props.jquery) {
       this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
