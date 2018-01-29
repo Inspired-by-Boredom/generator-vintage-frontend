@@ -166,13 +166,13 @@ class VintageFrontend extends Generator {
     mkdirp.sync(this.destinationPath('src/js/modules/dep'));
 
     try {
-      const files = fs.readdirSync(this.templatePath(`www/src/template/${props.templateEngine}`));
+      const files = fs.readdirSync(this.templatePath(`src/template/${props.templateEngine}`));
       files.forEach((file) => {
-        fs.copyFileSync(file, this.destinationPath('www/src/template'))
+        fs.copyFileSync(file, this.destinationPath('src/template'))
       });
 
-      fs.unlinkSync(this.destinationPath('www/src/template/pug'));
-      fs.unlinkSync(this.destinationPath('www/src/template/mustache'));
+      fs.unlinkSync(this.destinationPath('src/template/pug'));
+      fs.unlinkSync(this.destinationPath('src/template/mustache'));
     } catch (e) {
       console.error(`Error while creating template directories: ${e.message}`)
     }
@@ -183,11 +183,7 @@ class VintageFrontend extends Generator {
     }
 
     if (props.isPug) {
-      try {
-        fs.unlinkSync(this.destinationPath('gulp/tasks/json.js'));
-      } catch (e) {
-        console.error(`Error while deleting 'json.js' file, please remove it by yourself: ${e.message}`);
-      }
+      this.fs.delete(this.destinationPath('gulp/tasks/json.js'));
     }
 
     if (!props.isPug) {
