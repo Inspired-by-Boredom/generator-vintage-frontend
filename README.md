@@ -23,7 +23,7 @@ It is recommended to use [vintage-cli](https://github.com/vintage-web-production
 
 > Answer questions
 
-![vintage-frontend installation](http://i.imgur.com/otj25Xa.jpg "vintage-frontend questions")
+![vintage-frontend installation](http://i.imgur.com/u0QQ4cn.jpg "vintage-frontend questions")
 
 Done!
 
