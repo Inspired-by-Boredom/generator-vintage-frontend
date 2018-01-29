@@ -1,0 +1,16 @@
+/* LIBS */
+@import 'libs/vintage-reset-normalize';
+
+/* PARTIALS */
+@import 'partials/mixins';
+@import 'partials/variables';
+@import 'partials/fonts';
+@import 'partials/helpers';
+@import 'partials/keyframes';
+@import 'partials/svg';
+
+/* COMPONENTS */
+@import 'components/common';
+
+/* PAGES */
+@import 'pages/home';

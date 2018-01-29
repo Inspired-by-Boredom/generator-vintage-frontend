@@ -1,0 +1,4 @@
+{
+  "inited": true,
+  "templateEngine": "<%= templateEngine %>"
+}

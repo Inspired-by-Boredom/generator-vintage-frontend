@@ -1,2 +1,0 @@
-// jscs:disable
-import 'jquery';

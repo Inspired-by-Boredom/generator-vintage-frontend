@@ -69,18 +69,20 @@ class VintageFrontend extends Generator {
       },
       {
         type    : 'list',
-        name    : 'templateList',
-        message : 'Which template engine will your project use?',
+        name    : 'templateEngine',
+        message : 'Which template engine do you prefer?',
         default : 'pug',
-        choices: [{
-            name: "pug",
-            value: "pug",
+        choices: [
+          {
+            name: 'pug',
+            value: 'pug',
             checked: true
           },
           {
-            name: "mustache",
-            value: "mustache"
-        }]
+            name: 'mustache',
+            value: 'mustache'
+          }
+        ]
       },
       {
         type: 'confirm',
@@ -112,114 +114,64 @@ class VintageFrontend extends Generator {
   }
 
   writing() {
-    const props  = this.answers;
+    const props = {
+      ...this.answers,
+      _: { kebabCase: _.kebabCase },
+      isPug: this.answers.templateEngine === 'pug'
+    };
     const copy = (input, output = input) =>
       this.fs.copy(this.templatePath(input), this.destinationPath(output));
     const template = (input, output = input) =>
       this.fs.copyTpl(this.templatePath(input), this.destinationPath(output), props);
 
-    props._ = { kebabCase: _.kebabCase };
+    // static files
+    copy('gitignore',    '.gitignore');
+    copy('gulpfile.js',  'gulpfile.js');
+    copy('jsdoc.json',   'jsdoc.json');
+    copy('rules.jscsrc', 'rules.jscsrc');
 
-    // gulp template tasks
-    const choosedTemplate = props.templateList;
-    this.log('template is will be: ' + props.templateList);
- 
-    // pug config template
-    const pugTemplate = () => {
-      // static files
-      copy('pug/gitignore', '.gitignore');
-      copy('pug/gulpfile.js', 'gulpfile.js');
-      copy('pug/jsdoc.json', 'jsdoc.json');
-      copy('pug/rules.jscsrc', 'rules.jscsrc');
-      copy('pug/vintage-frontend.json', 'vintage-frontend.json');
+    // static files (templates)
+    template('README.md_t',             'README.md');
+    template('package.json_t',          'package.json');
+    template('webpack.config.js_t',     'webpack.config.js');
+    template('vintage-frontend.json_t', 'vintage-frontend.json');
 
-      // static files (templates)
-      template('pug/README.md_t', 'README.md');
-      template('pug/package.json_t', 'package.json');
-      template('pug/webpack.config.js_t', 'webpack.config.js');
+    // gulp config
+    template('gulp/config.js', 'gulp/config.js');
 
-      // gulp config
-      template('pug/gulp/config.js', 'gulp/config.js');
+    // gulp tasks
+    copy('pug/gulp/tasks/sprite-svg',    'gulp/tasks/sprite-svg');
+    copy('pug/gulp/tasks/default.js',    'gulp/tasks/default.js');
+    copy('pug/gulp/tasks/docs.js',       'gulp/tasks/docs.js');
+    copy('pug/gulp/tasks/json.js',       'gulp/tasks/json.js');
+    copy('pug/gulp/tasks/livereload.js', 'gulp/tasks/livereload.js');
+    copy('pug/gulp/tasks/scripts.js',    'gulp/tasks/scripts.js');
+    copy('pug/gulp/tasks/styles.js',     'gulp/tasks/styles.js');
+    copy(
+      `gulp/tasks/templates-${props.templateEngine}.js`,
+      `gulp/tasks/templates-${props.templateEngine}.js`
+    );
 
-      // gulp tasks
-      copy('pug/gulp/tasks/sprite-svg',       'gulp/tasks/sprite-svg');
-      template('pug/gulp/tasks/default.js',   'gulp/tasks/default.js');
-      copy('pug/gulp/tasks/docs.js',          'gulp/tasks/docs.js');
-      copy('pug/gulp/tasks/livereload.js',    'gulp/tasks/livereload.js');
-      template('pug/gulp/tasks/scripts.js',   'gulp/tasks/scripts.js');
-      copy('pug/gulp/tasks/styles.js',        'gulp/tasks/styles.js');
-      template('pug/gulp/tasks/templates.js', 'gulp/tasks/templates.js');
+    // copy source directory
+    template('src', 'src');
 
-      // copy source directory
-      template('pug/src', 'src');
+    // copy output directory
+    template('www', 'www');
 
-      // copy output directory
-      template('pug/www', 'www');
+    // create folders for images, fonts, scripts
+    mkdirp.sync(this.destinationPath('www/static/fonts'));
+    mkdirp.sync(this.destinationPath('www/static/img'));
+    mkdirp.sync(this.destinationPath('www/static/js'));
+    mkdirp.sync(this.destinationPath('www/static/css'));
+    mkdirp.sync(this.destinationPath('src/js/modules/dep'));
 
-      // create folders for images, fonts, scripts
-      mkdirp.sync(this.destinationPath('www/static/fonts'));
-      mkdirp.sync(this.destinationPath('www/static/img'));
-      mkdirp.sync(this.destinationPath('www/static/js'));
-      mkdirp.sync(this.destinationPath('www/static/css'));
-      mkdirp.sync(this.destinationPath('src/js/modules/dep'));
-
-      // remove unnecessary
-      if (!props.jquery) {
-        this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
-      }
+    // optional actions
+    if (!props.jquery) {
+      this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
     }
 
-    // mustache config template
-    const mustacheTemplate = () => {
-      // static files
-      copy('mustache/gitignore', '.gitignore');
-      copy('mustache/gulpfile.js', 'gulpfile.js');
-      copy('mustache/jsdoc.json', 'jsdoc.json');
-      copy('mustache/rules.jscsrc', 'rules.jscsrc');
-      copy('mustache/vintage-frontend.json', 'vintage-frontend.json');
-
-      // static files (templates)
-      template('mustache/README.md_t', 'README.md');
-      template('mustache/package.json_t', 'package.json');
-      template('mustache/webpack.config.js_t', 'webpack.config.js');
-
-      // gulp config
-      template('mustache/gulp/config.js', 'gulp/config.js');
-
-      // gulp tasks
-      copy('mustache/gulp/tasks/sprite-svg',       'gulp/tasks/sprite-svg');
-      template('mustache/gulp/tasks/default.js',   'gulp/tasks/default.js');
-      copy('mustache/gulp/tasks/docs.js',          'gulp/tasks/docs.js');
-      copy('mustache/gulp/tasks/livereload.js',    'gulp/tasks/livereload.js');
-      template('mustache/gulp/tasks/scripts.js',   'gulp/tasks/scripts.js');
-      copy('mustache/gulp/tasks/styles.js',        'gulp/tasks/styles.js');
-      template('mustache/gulp/tasks/mustache.js',  'gulp/tasks/templates.js');
-      template('mustache/gulp/tasks/json.js',      'gulp/tasks/json.js');
-      // copy source directory
-      template('mustache/src', 'src');
-
-      // copy output directory
-      template('mustache/www', 'www');
-
-      // create folders for images, fonts, scripts
-      mkdirp.sync(this.destinationPath('www/static/fonts'));
-      mkdirp.sync(this.destinationPath('www/static/img'));
-      mkdirp.sync(this.destinationPath('www/static/js'));
-      mkdirp.sync(this.destinationPath('www/static/css'));
-      mkdirp.sync(this.destinationPath('src/js/modules/dep'));
-
-      // remove unnecessary
-      if (!props.jquery) {
-        this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
-      }
-    }
-
-    // run config according to template 
-    if(choosedTemplate === 'pug') {
-      pugTemplate();
-    }
-    else {
-      mustacheTemplate();
+    if (!props.isPug) {
+      mkdirp.sync(this.destinationPath('www/static/data'));
     }
   }
 
