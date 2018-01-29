@@ -1,0 +1,20 @@
+{
+  "nav": [
+    {
+        "name": "Home",        
+        "url": "/"
+    },
+    {
+        "name": "Services", 
+        "url": "/services.html"
+    },
+    {
+        "name": "About", 
+        "url": "/about.html"
+    },
+    {
+        "name": "Contacts", 
+        "url": "/contacts.html"
+    }
+  ]
+}
