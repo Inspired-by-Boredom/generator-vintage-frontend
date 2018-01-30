@@ -1,6 +1,6 @@
 {
   "name": "<%= _.kebabCase(name) %>",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "<%= description %>",
   "scripts": {
     "development": "cross-env NODE_ENV=development gulp",
