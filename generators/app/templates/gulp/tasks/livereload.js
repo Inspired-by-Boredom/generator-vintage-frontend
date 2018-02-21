@@ -15,7 +15,8 @@ gulp.task('livereload', () => {
     notify: false
   });
 
-  gulp
+  // Initialize watcher
+  browserSync
     .watch('./www/**/*.*')
     .on('change', browserSync.reload);
 });
