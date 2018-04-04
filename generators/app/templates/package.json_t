@@ -1,6 +1,6 @@
 {
   "name": "<%= _.kebabCase(name) %>",
-  "version": "0.8.4",
+  "version": "0.8.5",
   "description": "<%= description %>",
   "scripts": {
     "development": "cross-env NODE_ENV=development gulp",
@@ -9,7 +9,7 @@
     "openDocs": "start ./docs/index.html"
   },<% if (jquery) { %>
   "dependencies": {
-    "jquery": "^2.2.4"
+    "jquery": "^3.0.0"
   },<% } %>
   "author": "<%= username %><% if(email){ %> <<%= email %>><% } %>",
   "devDependencies": {

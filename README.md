@@ -5,7 +5,7 @@
 
 Yeoman generator for modern front-end apps.
 
-It is recommended to use [vintage-cli](https://github.com/vintage-web-production/vintage-cli/) for updating/running/building generated project.
+It is recommended to use [vintage-cli](https://github.com/Inspired-by-Boredom/vintage-cli/) for updating/running/building generated project.
 
 ## Prerequisites ##
 
@@ -43,7 +43,7 @@ npm run production
 
 ## License ##
 
-[MIT License](https://github.com/Vintage-web-production/generator-vintage-frontend/blob/master/LICENSE)
+[MIT License](https://github.com/Inspired-by-Boredom/generator-vintage-frontend/blob/master/LICENSE)
 
 [npm-url]: https://www.npmjs.com/package/generator-vintage-frontend
 [npm-image]: https://badge.fury.io/js/generator-vintage-frontend.svg
