@@ -184,9 +184,8 @@ npm run-script openDocs
 
 ## Built with
 
-* [Gulp](http://gulpjs.com/)<% if (isPug) { %>
-* [Pug](https://github.com/pugjs/pug)<% } %><% if (!isPug) { %>
-* [Mustache](https://github.com/janl/templates-mustache.js/)<% } %>
+* [Gulp](http://gulpjs.com/)
+* [Pug](https://github.com/pugjs/pug)
 * [Webpack](https://webpack.js.org/)
 * [Sass](http://sass-lang.com/)
 * [Babel](https://babeljs.io/)

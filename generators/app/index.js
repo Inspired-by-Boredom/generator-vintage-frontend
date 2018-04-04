@@ -68,23 +68,6 @@ class VintageFrontend extends Generator {
         default: ''
       },
       {
-        type    : 'list',
-        name    : 'templateEngine',
-        message : 'Which template engine do you prefer?',
-        default : 'pug',
-        choices: [
-          {
-            name: 'pug',
-            value: 'pug',
-            checked: true
-          },
-          {
-            name: 'mustache',
-            value: 'mustache'
-          }
-        ]
-      },
-      {
         type: 'confirm',
         name: 'jquery',
         message: 'Your project will include jQuery?',
@@ -114,49 +97,43 @@ class VintageFrontend extends Generator {
   }
 
   writing() {
-    const props = {
-      ...this.answers,
-      _: { kebabCase: _.kebabCase },
-      isPug: this.answers.templateEngine === 'pug'
-    };
+    const props  = this.answers;
     const copy = (input, output = input) =>
       this.fs.copy(this.templatePath(input), this.destinationPath(output));
     const template = (input, output = input) =>
       this.fs.copyTpl(this.templatePath(input), this.destinationPath(output), props);
 
+    props._ = { kebabCase: _.kebabCase };
+
     // static files
-    copy('gitignore',    '.gitignore');
-    copy('gulpfile.js',  'gulpfile.js');
-    copy('jsdoc.json',   'jsdoc.json');
-    copy('rules.jscsrc', 'rules.jscsrc');
+    copy('gitignore', '.gitignore');
+    copy('gulpfile.js');
+    copy('jsdoc.json');
+    copy('rules.jscsrc');
+    copy('vintage-frontend.json');
 
     // static files (templates)
-    template('README.md_t',             'README.md');
-    template('package.json_t',          'package.json');
-    template('webpack.config.js_t',     'webpack.config.js');
-    template('vintage-frontend.json_t', 'vintage-frontend.json');
+    template('README.md_t', 'README.md');
+    template('package.json_t', 'package.json');
+    template('webpack.config.js_t', 'webpack.config.js');
 
     // gulp config
-    template('gulp/config.js', 'gulp/config.js');
+    template('gulp/config.js');
 
     // gulp tasks
-    copy('gulp/tasks/sprite-svg',    'gulp/tasks/sprite-svg');
-    copy('gulp/tasks/default.js',    'gulp/tasks/default.js');
-    copy('gulp/tasks/docs.js',       'gulp/tasks/docs.js');
-    copy('gulp/tasks/json.js',       'gulp/tasks/json.js');
-    copy('gulp/tasks/livereload.js', 'gulp/tasks/livereload.js');
-    copy('gulp/tasks/scripts.js',    'gulp/tasks/scripts.js');
-    copy('gulp/tasks/styles.js',     'gulp/tasks/styles.js');
-    copy(
-      `gulp/tasks/templates-${props.templateEngine}.js`,
-      `gulp/tasks/templates-${props.templateEngine}.js`
-    );
+    copy('gulp/tasks/sprite-svg');
+    template('gulp/tasks/default.js');
+    copy('gulp/tasks/docs.js');
+    copy('gulp/tasks/livereload.js');
+    template('gulp/tasks/scripts.js');
+    copy('gulp/tasks/styles.js');
+    template('gulp/tasks/templates.js');
 
     // copy source directory
-    template('src', 'src');
+    template('src');
 
     // copy output directory
-    template('www', 'www');
+    template('www');
 
     // create folders for images, fonts, scripts
     mkdirp.sync(this.destinationPath('www/static/fonts'));
@@ -165,27 +142,9 @@ class VintageFrontend extends Generator {
     mkdirp.sync(this.destinationPath('www/static/css'));
     mkdirp.sync(this.destinationPath('src/js/modules/dep'));
 
-    // Template engine
-    try {
-      template(`src/template/${props.templateEngine}`, 'src/template');
-      this.fs.delete(this.destinationPath('src/template/pug'));
-      this.fs.delete(this.destinationPath('src/template/mustache'));
-    } catch (e) {
-      console.error(`Error while creating template directories: ${e.message}`)
-    }
-
-    // optional actions
+    // remove unnecessary
     if (!props.jquery) {
       this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
-    }
-
-    if (props.isPug) {
-      this.fs.delete(this.destinationPath('gulp/tasks/json.js'));
-    }
-
-    if (!props.isPug) {
-      mkdirp.sync(this.destinationPath('www/static/data'));
-      this.fs.writeJSON(this.destinationPath('www/static/data/combined.json'), {});
     }
   }
 

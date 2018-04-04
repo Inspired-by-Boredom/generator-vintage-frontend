@@ -68,11 +68,10 @@ const bundle = {
  * @type {Object}
  */
 const tasks = {
-  js   : 'webpack',<% if (!isPug) { %>
-  json : bundle.production ? 'json-compile' : 'json-watch',<% } %>
-  html : bundle.production ? 'template-compile' : 'template-watch',
+  js   : 'webpack',
+  html : bundle.production ? 'pug-compile' : 'pug-watch',
   css  : bundle.production ? 'css-compile' : 'css-watch',
-  svg  : bundle.production ? 'svg-compile' : 'svg-watch',
+  svg  : bundle.production ? 'svg-compile' : 'svg-watch'
 };
 
 /**
@@ -87,5 +86,5 @@ module.exports = {
   development: bundle.development,
   production: bundle.production,
 
-  tasksArray: [tasks.svg, tasks.js, tasks.css, <% if (!isPug) { %>tasks.json, <% } %>tasks.html]
+  tasksArray: [tasks.svg, tasks.js, tasks.css, tasks.html]
 };

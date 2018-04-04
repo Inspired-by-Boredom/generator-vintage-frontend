@@ -83,5 +83,5 @@ gulp.task('svg-compile', function() {
  * Compile SVG and HTML on change.
  */
 gulp.task('svg-watch', function() {
-  gulp.watch('src/svg/*.svg', () => runSequence('svg-compile', 'template-compile'));
+  gulp.watch('src/svg/*.svg', () => runSequence('svg-compile', 'pug-compile'));
 });

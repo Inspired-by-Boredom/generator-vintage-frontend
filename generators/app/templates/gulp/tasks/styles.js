@@ -52,17 +52,17 @@ function compileCss(src, dest) {
   gulp
     .src(src)
     .pipe(plumber(config.plumberOptions))
-    .pipe(gulpif(config.development, sourcemaps.init()))
+    .pipe(gulpif(!config.production, sourcemaps.init()))
     .pipe(sass({
       outputStyle: config.production ? 'compressed' : 'expanded',
       precision: 5
     }))
     .pipe(postcss(processors))
     .pipe(gulpif(config.production, rename({
-      suffix: '',
+      suffix: '.min',
       extname: '.css'
     })))
-    .pipe(gulpif(config.development, sourcemaps.write()))
+    .pipe(gulpif(!config.production, sourcemaps.write()))
     .pipe(gulp.dest(dest));
 }
 
