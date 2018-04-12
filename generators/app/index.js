@@ -137,17 +137,8 @@ class VintageFrontend extends Generator {
     template('README.md_t', 'README.md');
     template('package.json_t', 'package.json');
 
-    // gulp config
-    copy('gulp/config.js');
-
-    // gulp tasks
-    copy('gulp/tasks/sprite-svg');
-    copy('gulp/tasks/default.js');
-    copy('gulp/tasks/docs.js');
-    copy('gulp/tasks/livereload.js');
-    template('gulp/tasks/scripts.js');
-    copy('gulp/tasks/styles.js');
-    copy('gulp/tasks/templates.js');
+    // gulp
+    copy('gulp');
 
     // copy source directory
     template('src');

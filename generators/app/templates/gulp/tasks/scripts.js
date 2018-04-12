@@ -11,7 +11,7 @@ const webpackConfig  = config.webpackConfig;
  * Only during development.
  */
 if (config.development) {
-  // Set watcher ('<% if (ts) { %>.ts<% } else { %>.js<% } %>' files)
+  // Set watcher (script files)
   webpackConfig.watch = true;
   webpackConfig.watchOptions = { aggregateTimeout: 100 };
 
@@ -37,7 +37,7 @@ if (config.production) {
  * Run webpack.
  */
 gulp.task('webpack', () => {
-  return gulp.src('src/<% if (ts) { %>ts<% } else { %>js<% } %>/index<% if (ts) { %>.ts<% } else { %>.js<% } %>')
+  return gulp.src(`src/${config.scriptsExtension}/index.${config.scriptsExtension}`)
     .pipe(plumber())
     .pipe(webpackStream(webpackConfig, Webpack))
     .pipe(gulp.dest('www/static'));
