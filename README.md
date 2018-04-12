@@ -7,7 +7,7 @@ Yeoman generator for modern front-end apps.
 
 It is recommended to use [vintage-cli](https://github.com/Inspired-by-Boredom/vintage-cli/) for updating/running/building generated project.
 
-## Prerequisites ##
+## Prerequisites
 
 ##### Install [yeoman](http://yeoman.io/):
 `npm install -g yo`
@@ -17,17 +17,17 @@ It is recommended to use [vintage-cli](https://github.com/Inspired-by-Boredom/vi
 
 > prepend with `sudo` if you are running on `*nix` OS.
 
-## Use generator-vintage-frontend ##
+## Use generator-vintage-frontend
 
 `yo vintage-frontend`
 
 > Answer questions
 
-![vintage-frontend installation](http://i.imgur.com/otj25Xa.jpg "vintage-frontend questions")
+![vintage-frontend installation](http://i.imgur.com/tMydbft.jpg "vintage-frontend questions")
 
 Done!
 
-## After installation ##
+## After installation
 
 Start development
 
@@ -41,7 +41,7 @@ Build production bundle
 npm run production
 ```
 
-## License ##
+## License
 
 [MIT License](https://github.com/Inspired-by-Boredom/generator-vintage-frontend/blob/master/LICENSE)
 
@@ -49,4 +49,4 @@ npm run production
 [npm-image]: https://badge.fury.io/js/generator-vintage-frontend.svg
 [license-url]: https://img.shields.io/npm/l/express.svg
 
-## [Changelog](https://github.com/Inspired-by-Boredom/generator-vintage-frontend/blob/master/CHANGELOG.md)
+### [Changelog](https://github.com/Inspired-by-Boredom/generator-vintage-frontend/blob/master/CHANGELOG.md)
