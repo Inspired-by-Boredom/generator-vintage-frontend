@@ -1,0 +1,5 @@
+{
+  "inited": true,
+  "scriptsLanguage": "<%= scriptsLanguage %>",
+  "hasJquery": <%= jquery %>
+}

@@ -1,13 +1,10 @@
 {
-  "version": "0.8.5",
+  "version": "0.9.0",
   "scripts": {
     "development": "cross-env NODE_ENV=development gulp",
     "production": "cross-env NODE_ENV=production gulp",
     "compileDocs": "jsdoc ./src -r -d docs -c jsdoc.json",
     "openDocs": "start ./docs/index.html"
-  },
-  "dependencies": {
-    "jquery": "^3.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.6",

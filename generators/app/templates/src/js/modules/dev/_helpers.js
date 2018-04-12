@@ -4,6 +4,8 @@
  * @module Helpers
  */<% if (jquery) { %>
 
+import $ from 'jquery';
+
 /**
  * Cache body DOM element.
  *
@@ -105,7 +107,7 @@ export const isScrolledIntoView = ($element, offsetTop = 0, fullyInView = false)
  * @param {jQuery} item - Item to compare with.
  * @returns {Boolean} - Indicate whether clicked target is the specified item or not.
  */
-export const checkClosest = (e, item) => $(e.target).closest(item).length > 0;<% } %><% if (!jquery) { %>
+export const checkClosest = (e, item) => $(e.target).closest(item).length > 0;<% } else { %>
 
 /**
  * Detect current page.
@@ -204,7 +206,7 @@ export const randomString = (length = 10) => Math.random().toString(36).substr(2
 export const debounce = (func, context, wait, immediate) => {
   let timeout;
 
-  return () => {
+  return function() {
     const args = arguments;
 
     const later = () => {

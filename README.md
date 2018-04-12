@@ -48,3 +48,5 @@ npm run production
 [npm-url]: https://www.npmjs.com/package/generator-vintage-frontend
 [npm-image]: https://badge.fury.io/js/generator-vintage-frontend.svg
 [license-url]: https://img.shields.io/npm/l/express.svg
+
+## [Changelog](https://github.com/Inspired-by-Boredom/generator-vintage-frontend/blob/master/CHANGELOG.md)

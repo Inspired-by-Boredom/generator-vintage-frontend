@@ -24,7 +24,7 @@ class VintageFrontend extends Generator {
 
   prompting() {
     this.log(yosay(
-      `Vintage Web Production ${chalk.yellow('vintage-frontend')} generator`
+      `Yeoman modern ${chalk.yellow('vintage-frontend')} generator`
     ));
 
     return this.prompt([
@@ -68,6 +68,19 @@ class VintageFrontend extends Generator {
         default: ''
       },
       {
+        type: 'list',
+        name: 'scriptsType',
+        message: 'Select scripts language:',
+        choices: [{
+          name: 'JavaScript (ES7 with some proposals)',
+          value: 'js'
+        }, {
+          name: 'TypeScript',
+          value: 'ts'
+        }],
+        default: 'js'
+      },
+      {
         type: 'confirm',
         name: 'jquery',
         message: 'Your project will include jQuery?',
@@ -97,37 +110,44 @@ class VintageFrontend extends Generator {
   }
 
   writing() {
-    const props  = this.answers;
+    const scriptsExtension = this.answers.scriptsType;
+    const isTS = scriptsExtension === 'ts';
+    const props = Object.assign({}, this.answers, {
+      _: {
+        kebabCase: _.kebabCase,
+      },
+      ts: isTS,
+      scriptsLanguage: scriptsExtension,
+    });
     const copy = (input, output = input) =>
       this.fs.copy(this.templatePath(input), this.destinationPath(output));
     const template = (input, output = input) =>
       this.fs.copyTpl(this.templatePath(input), this.destinationPath(output), props);
-
-    props._ = { kebabCase: _.kebabCase };
 
     // static files
     copy('gitignore', '.gitignore');
     copy('gulpfile.js');
     copy('jsdoc.json');
     copy('rules.jscsrc');
-    copy('vintage-frontend.json');
+    copy('webpack.config.js');
+    if (isTS) copy('tsconfig.json');
 
     // static files (templates)
+    template('vintage-frontend.json_t', 'vintage-frontend.json');
     template('README.md_t', 'README.md');
     template('package.json_t', 'package.json');
-    template('webpack.config.js_t', 'webpack.config.js');
 
     // gulp config
-    template('gulp/config.js');
+    copy('gulp/config.js');
 
     // gulp tasks
     copy('gulp/tasks/sprite-svg');
-    template('gulp/tasks/default.js');
+    copy('gulp/tasks/default.js');
     copy('gulp/tasks/docs.js');
     copy('gulp/tasks/livereload.js');
     template('gulp/tasks/scripts.js');
     copy('gulp/tasks/styles.js');
-    template('gulp/tasks/templates.js');
+    copy('gulp/tasks/templates.js');
 
     // copy source directory
     template('src');
@@ -140,12 +160,11 @@ class VintageFrontend extends Generator {
     mkdirp.sync(this.destinationPath('www/static/img'));
     mkdirp.sync(this.destinationPath('www/static/js'));
     mkdirp.sync(this.destinationPath('www/static/css'));
-    mkdirp.sync(this.destinationPath('src/js/modules/dep'));
+    mkdirp.sync(this.destinationPath(`src/${scriptsExtension}/modules/dep`));
+    if (isTS) mkdirp.sync(this.destinationPath('typings'));
 
     // remove unnecessary
-    if (!props.jquery) {
-      this.fs.delete(this.destinationPath('src/js/index.jquery.js'));
-    }
+    this.fs.delete(this.destinationPath(`src/${isTS ? 'js' : 'ts'}`));
   }
 
   install() {

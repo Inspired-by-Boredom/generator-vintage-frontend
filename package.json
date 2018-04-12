@@ -1,6 +1,6 @@
 {
   "name": "generator-vintage-frontend",
-  "version": "0.8.5",
+  "version": "0.9.0",
   "description": "Modern front-end workflow generator",
   "homepage": "https://github.com/Inspired-by-Boredom/generator-vintage-frontend",
   "repository": "Inspired-by-Boredom/generator-vintage-frontend",
@@ -12,6 +12,7 @@
     "ES6",
     "ES7",
     "SASS",
+    "TypeScript",
     "Pug"
   ],
   "files": [
@@ -25,6 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^1.1.3",
+    "fs": "0.0.1-security",
     "global": "^4.3.2",
     "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",

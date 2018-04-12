@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "outDir": "./www/static/",
+    "noImplicitAny": false,
+    "module": "es6",
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "allowJs": false,
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "./typings/*"
+      ]
+    },
+    "lib": [
+      "es2015",
+      "dom"
+    ]
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}

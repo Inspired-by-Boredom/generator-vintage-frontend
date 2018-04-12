@@ -90,8 +90,8 @@ npm run production
 
 ### JS
 
-Main JS entry point: `src/js/index.js`
-Will be compiled to: `www/static/js/index.js`
+Main JS entry point: `src/js/index.ts`
+Will be compiled to: `www/static/js/index.ts`
 
 ### SCSS
 
@@ -117,13 +117,13 @@ Vintage-workflow will create sprite and inject it into the HTML layout (on each 
     |   |-- dep
     |   |-- dev
     |-- pages
-    index.js
-    index.jquery.js
+    index.ts
+    index.jquery.ts
 ```
 
 ### `components`
 
-`PublicAPI.js`, `Common.js` and other components (`Header.js` or `Footer.js` etc.).
+`PublicAPI.ts`, `Common.ts` and other components (`Header.js` or `Footer.js` etc.).
 Components from this directory should be used only by `pages` and `index`.
 
 ### `modules/dep`
@@ -187,5 +187,6 @@ npm run-script openDocs
 * [Gulp](http://gulpjs.com/)
 * [Pug](https://github.com/pugjs/pug)
 * [Webpack](https://webpack.js.org/)
-* [Sass](http://sass-lang.com/)
+* [Sass](http://sass-lang.com/)<% if (ts) { %>
+* [TypeScript](https://www.typescriptlang.org/index.html)<% } %>
 * [Babel](https://babeljs.io/)

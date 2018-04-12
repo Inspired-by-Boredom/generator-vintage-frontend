@@ -1,6 +1,7 @@
 'use strict';
 
 const notify = require('gulp-notify');
+const fs = require('fs');
 
 /**
  * Autoprefixer options (CSS).
@@ -20,13 +21,21 @@ const browsers = ['last 3 versions', 'Android 4.4', 'ie 11', 'ios 8'];
 const cssPreprocessorExtension = '{scss,sass}';
 
 /**
+ * Detect currently used scripts extension.
+ *
+ * @constant
+ * @type {String}
+ */
+const scriptsExtension = JSON.parse(fs.readFileSync('vintage-frontend.json', 'utf8')).scriptsLanguage;
+
+/**
  * Webpack configuration.
  * Used when compiling javascript.
  *
  * @constant
  * @type {Object}
  */
-const webpackConfig = require('../webpack.config.js');
+const webpackConfig = require('../webpack.config.js')(scriptsExtension);
 
 /**
  * Configure error handling with 'gulp-notify'.
@@ -82,6 +91,7 @@ module.exports = {
   webpackConfig,
   browsers,
   plumberOptions,
+  scriptsExtension,
 
   development: bundle.development,
   production: bundle.production,
